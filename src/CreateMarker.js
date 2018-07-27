@@ -8,33 +8,31 @@ export default class CreateMarker extends Component {
     showTooltip: false,
     movies: []
   };
-  componentDidMount(){
-    let moviesFromCinema
-    fetch('https://api.internationalshowtimes.com/v4/movies/?cinema_id='+ this.props.id,{  
-          headers: {
-       
-        "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"    },
-    }).then(function(response) {
-     
-      // Read the response as json.
-      return response.json();
-    })
-    .then(function(responseAsJson) {
-      // Do stuff with the JSON
-      // console.log(responseAsJson);
-      // cinema = responseAsJson
-      moviesFromCinema = responseAsJson.movies
-      // console.log("ready")
-    })
-    .catch(function(error) {
-      console.log('Looks like there was a problem: \n', error);
-    })
-    .then(() => {
-      this.setState({
-        movies : moviesFromCinema
-      })
-    }
+  componentDidMount() {
+    let moviesFromCinema;
+    fetch(
+      "https://api.internationalshowtimes.com/v4/movies/?cinema_id=" +
+        this.props.id,
+      {
+        headers: {
+          "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"
+        }
+      }
     )
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(responseAsJson) {
+        moviesFromCinema = responseAsJson.movies;
+      })
+      .catch(function(error) {
+        console.log("Looks like there was a problem: \n", error);
+      })
+      .then(() => {
+        this.setState({
+          movies: moviesFromCinema
+        });
+      });
   }
 
   clickTooltip() {
@@ -61,10 +59,9 @@ export default class CreateMarker extends Component {
         {showTooltip && (
           <CreateInfoWindow
             name={name}
-            id = {id}
+            id={id}
             closeWindow={this.closeWindow.bind(this)}
-            movies = {this.state.movies}
-
+            movies={this.state.movies}
           />
         )}
       </Marker>

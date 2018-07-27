@@ -126,3 +126,16 @@ a:hover {
 #menuToggle input:checked~ul {
   transform: none;
 }
+
+.poster-image-thumbnail{
+  max-width: 25px;
+}
+
+.info-window-details{
+  display: flex;
+  align-items: center;
+  margin: 0 0 5px 0;
+}
+.info-window{
+  color: black;
+}

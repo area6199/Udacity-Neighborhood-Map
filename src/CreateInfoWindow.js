@@ -2,56 +2,30 @@ import React, { Component } from "react";
 import { InfoWindow } from "react-google-maps";
 
 export default class CreateInfoWindow extends Component {
-  state ={
+  state = {
     movies: []
-  }
-// componentDidMount(){
-//   let moviesFromCinema
-//   fetch('https://api.internationalshowtimes.com/v4/movies/?cinema_id='+ this.props.id,{  
-//         headers: {
-     
-//       "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"    },
-//   }).then(function(response) {
-   
-//     // Read the response as json.
-//     return response.json();
-//   })
-//   .then(function(responseAsJson) {
-//     // Do stuff with the JSON
-//     // console.log(responseAsJson);
-//     // cinema = responseAsJson
-//     moviesFromCinema = responseAsJson.movies
-//     console.log("ready")
-//   })
-//   .catch(function(error) {
-//     console.log('Looks like there was a problem: \n', error);
-//   })
-//   .then(() => {
-//     this.setState({
-//       movies : moviesFromCinema
-//     })
-//   }
-//   )
-// }
+  };
 
   render() {
     const { name } = this.props;
 
-    
-
     return (
       <InfoWindow onCloseClick={this.props.closeWindow}>
-        <div>
-          <h1>{name}</h1>
-
-          {this.props.movies.map((movie) => 
-            <p>{movie.title}</p>
-          )}
-         
-          {/* <p> {this.state.movies[0].title}</p> */}
-
-
-
+        <div className="info-window">
+          <h2>{name}</h2>
+          <h4>Movies playing</h4>
+          {(this.props.movies.length === 0 && <p>No programm available</p>) ||
+            this.props.movies.map(movie => (
+              <div className="info-window-details">
+                <img
+                  src={movie.poster_image_thumbnail}
+                  alt={movie.title}
+                  className="poster-image-thumbnail"
+                  style={{ width: 25, paddingRight: 10 }}
+                />
+                <span>{movie.title}</span>
+              </div>
+            ))}
         </div>
       </InfoWindow>
     );
