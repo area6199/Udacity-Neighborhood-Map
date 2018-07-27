@@ -16,39 +16,10 @@ const UdacityNeighborhoodMap = withScriptjs(
 );
 
 export default class MapContainer extends Component {
-  state = {
-    cinemaLocations: [],
-    movieShowtime: []
-  };
-  componentDidMount() {
-    let cinema;
-
-    fetch(
-      "https://api.internationalshowtimes.com/v4/cinemas/?location=49.445421,11.081630&distance=10",
-      {
-        headers: {
-          "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"
-        }
-      }
-    )
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(responseAsJson) {
-        cinema = responseAsJson.cinemas;
-      })
-      .catch(function(error) {
-        console.log("Looks like there was a problem: \n", error);
-      })
-      .then(() => {
-        this.setState({
-          cinemaLocations: cinema
-        });
-      });
-  }
+  
 
   render() {
-    const places = this.state.cinemaLocations.map((location, index) => (
+    const places = this.props.cinemaLocations.map((location, index) => (
       <CreateMarker
         lat={location.location.lat}
         lng={location.location.lon}
