@@ -30,7 +30,7 @@ a:hover {
   user-select: none;  
 }
 
-#menuToggle input {
+.toogle-button {
   display: block;
   width: 40px;
   height: 32px;
@@ -44,6 +44,9 @@ a:hover {
   /* and place it over the hamburger */
 }
 
+#menuToggle{
+  height: 100vh;
+}
 
 
 #menuToggle span {
@@ -106,12 +109,19 @@ a:hover {
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
-  height: calc(100vh - 152px);
+  /* height: calc(100vh - 152px); */
   background: #ededed;
   list-style-type: none;
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+  /* overflow-y: auto; */
+
+}
+
+#menu-list {
+  /* overflow-y: auto; */
+
 }
 
 #menu li {
@@ -138,4 +148,28 @@ a:hover {
 }
 .info-window{
   color: black;
+}
+
+/* #search-list input {
+  opacity: 1;
+  position: relative;
+  color: green;
+} */
+.App{
+  width: 100%;
+  display: flex;
+}
+.navigation-bar{
+  width: 20%;
+  overflow: hidden;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.map-container{
+  width: 80%;
+}
+ul {
+  list-style-type: none;
+  padding: 5px;
 }

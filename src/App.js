@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
 import NavigationBar from "./NavigationBar";
+import NavigationBar2 from "./NavigationBar2";
 import MapContainer from "./MapContainer";
+import escapeRegExp from "escape-string-regexp";
+
 // import Map from './Map'
 // import ReactDOM from 'react-dom'
 
 class App extends Component {
   state = {
     cinemaLocations: [],
-  }
+    cinemaLocationsFilterd: []
+  };
   componentDidMount() {
     let cinema;
 
@@ -31,15 +35,40 @@ class App extends Component {
       })
       .then(() => {
         this.setState({
-          cinemaLocations: cinema
+          cinemaLocations: cinema,
+          cinemaLocationsFilterd: cinema
         });
       });
   }
+
+ filterLocations = (value) => {
+   let searchedLocations
+  const match = new RegExp(escapeRegExp(value), "i");
+  searchedLocations =   this.state.cinemaLocations.filter(location =>
+    match.test(location.name))
+    this.setState({
+      cinemaLocationsFilterd: searchedLocations
+    })
+  
+}
+
+  
+  // filterLocations = locations => {
+  //   this.setState({ 
+  //     cinemaLocationsFilterd: locations
+  //   });
+  // };
+
   render() {
     return (
       <div className="App">
-        <NavigationBar cinemaLocations={this.state.cinemaLocations} />
-        <MapContainer cinemaLocations={this.state.cinemaLocations}/>
+        <NavigationBar2 cinemaLocations={this.state.cinemaLocations}
+        cinemaLocationsFilterd={this.state.cinemaLocationsFilterd}
+                  filterLocations={this.filterLocations}
+                  />
+        <MapContainer
+          cinemaLocations={this.state.cinemaLocationsFilterd}
+        />
       </div>
     );
   }

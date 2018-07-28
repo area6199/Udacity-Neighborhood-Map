@@ -30,6 +30,7 @@ export default class MapContainer extends Component {
     ));
 
     return (
+      <div className = 'map-container'>
       <UdacityNeighborhoodMap
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDCdankEOle73lu7TELdK0j-ssCMa3kaI&v=3&callback=initMap"
         loadingElement={<div style={{ height: `100vh` }} />}
@@ -42,6 +43,7 @@ export default class MapContainer extends Component {
         defaultZoom={12}
         places={places}
       />
+      </div>
     );
   }
 }
