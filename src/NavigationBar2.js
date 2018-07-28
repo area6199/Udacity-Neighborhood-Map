@@ -8,7 +8,7 @@ export default class NavigationBar2 extends Component {
 
   handleChange(event) {
     this.setState({ value: event.target.value });
-    this.props.filterLocations(event.target.value)
+    this.props.filterLocations(event.target.value);
   }
 
   render() {
@@ -25,26 +25,12 @@ export default class NavigationBar2 extends Component {
               />
             </li>
             <div>
-
-              {/* {typeof searchedLocations !== "undefined" &&
-                searchedLocations.map(cinema => <li>{cinema.name}</li>)
-              ||  this.props.cinemaLocations.map(cinema => <li>{cinema.name}</li>)
-
-              } */}
-
-            {
-(this.props.cinemaLocationsFilterd.map(cinema => <li>{cinema.name}</li>)) 
-            }
-            {/* {
-this.props.cinemaLocationsFilterd.length > 0 && (this.props.cinemaLocationsFilterd.map(cinema => <li>{cinema.name}</li>)) ||
-(this.props.cinemaLocations.map(cinema => <li>{cinema.name}</li>))
-            } */}
-              
-
+              {this.props.cinemaLocationsFilterd.map(cinema => (
+                <li>{cinema.name}</li>
+              ))}
             </div>
 
-            <div>
-            </div>
+            <div />
           </ul>
         </nav>
       </div>

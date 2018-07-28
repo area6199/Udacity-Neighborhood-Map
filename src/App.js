@@ -41,34 +41,25 @@ class App extends Component {
       });
   }
 
- filterLocations = (value) => {
-   let searchedLocations
-  const match = new RegExp(escapeRegExp(value), "i");
-  searchedLocations =   this.state.cinemaLocations.filter(location =>
-    match.test(location.name))
+  filterLocations = value => {
+    let searchedLocations;
+    const match = new RegExp(escapeRegExp(value), "i");
+    searchedLocations = this.state.cinemaLocations.filter(location =>
+      match.test(location.name)
+    );
     this.setState({
       cinemaLocationsFilterd: searchedLocations
-    })
-  
-}
-
-  
-  // filterLocations = locations => {
-  //   this.setState({ 
-  //     cinemaLocationsFilterd: locations
-  //   });
-  // };
+    });
+  };
 
   render() {
     return (
       <div className="App">
-        <NavigationBar2 cinemaLocations={this.state.cinemaLocations}
-        cinemaLocationsFilterd={this.state.cinemaLocationsFilterd}
-                  filterLocations={this.filterLocations}
-                  />
-        <MapContainer
-          cinemaLocations={this.state.cinemaLocationsFilterd}
+        <NavigationBar2
+          cinemaLocationsFilterd={this.state.cinemaLocationsFilterd}
+          filterLocations={this.filterLocations}
         />
+        <MapContainer cinemaLocations={this.state.cinemaLocationsFilterd} />
       </div>
     );
   }
