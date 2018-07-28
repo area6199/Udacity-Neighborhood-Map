@@ -164,6 +164,8 @@ a:hover {
   overflow: hidden;
   overflow-y: auto;
   height: 100vh;
+  min-width: 150px;
+
 }
 
 .map-container{
@@ -172,4 +174,16 @@ a:hover {
 ul {
   list-style-type: none;
   padding: 5px;
+}
+#search-cinemas-input{
+  width: 100%;
+}
+#search-cinemas-li{
+  padding-right: 4px;
+}
+.filtered-cinemas {
+  background-color: grey;
+  margin-bottom: 2px;
+  margin-top: 2px;
+  padding: 2px;
 }

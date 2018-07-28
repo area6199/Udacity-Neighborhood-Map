@@ -16,17 +16,19 @@ export default class NavigationBar2 extends Component {
       <div className="navigation-bar">
         <nav>
           <ul>
-            <li>
+            <li id= 'search-cinemas-li'>
               <input
                 type="text"
                 value={this.state.value}
-                className="search-list"
+                id="search-cinemas-input"
                 onChange={this.handleChange.bind(this)}
+                placeholder='Search cinemas'
+
               />
             </li>
             <div>
               {this.props.cinemaLocationsFilterd.map(cinema => (
-                <li>{cinema.name}</li>
+                <li className= 'filtered-cinemas'>{cinema.name}</li>
               ))}
             </div>
 
