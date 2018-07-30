@@ -5,18 +5,17 @@ import NavigationBar2 from "./NavigationBar2";
 import MapContainer from "./MapContainer";
 import escapeRegExp from "escape-string-regexp";
 
-// import Map from './Map'
-// import ReactDOM from 'react-dom'
-
 class App extends Component {
   state = {
     cinemaLocations: [],
-    cinemaLocationsFilterd: []
+    cinemaLocationsFilterd: [],
+    errorState: false
   };
   componentDidMount() {
     let cinema;
 
     fetch(
+      // "https://ap.com/v4/cinemas/?location=49.445421,11.081630&distance=10",
       "https://api.internationalshowtimes.com/v4/cinemas/?location=49.445421,11.081630&distance=10",
       {
         headers: {
@@ -30,9 +29,12 @@ class App extends Component {
       .then(function(responseAsJson) {
         cinema = responseAsJson.cinemas;
       })
-      .catch(function(error) {
-        console.log("Looks like there was a problem: \n", error);
-      })
+      .catch((error) => {
+        this.setStateOfError(true)
+                console.log("Looks like there was a problem: \n", error);
+
+    })
+   
       .then(() => {
         this.setState({
           cinemaLocations: cinema,
@@ -52,14 +54,41 @@ class App extends Component {
     });
   };
 
+  setStateOfcinemaLocations = (id, showInfowWindowValue) => {
+    let locations = this.state.cinemaLocationsFilterd;
+    let index = locations.findIndex(location => location.id === id);
+    // console.log(index);
+    if (index !== -1) {
+      locations[index].showInfowWindow = showInfowWindowValue;
+      // console.log(locations);
+      this.setState({
+        cinemaLocationsFilterd: locations
+      });
+    }
+  };
+
+  setStateOfError = state => {
+    this.setState({
+      errorState: state
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <NavigationBar2
           cinemaLocationsFilterd={this.state.cinemaLocationsFilterd}
           filterLocations={this.filterLocations}
+          setStateOfcinemaLocations={this.setStateOfcinemaLocations}
         />
-        <MapContainer cinemaLocations={this.state.cinemaLocationsFilterd} />
+        <MapContainer
+          cinemaLocations={this.state.cinemaLocationsFilterd}
+          setStateOfcinemaLocations={this.setStateOfcinemaLocations}
+          showError={this.setStateOfError}
+        />
+        {this.state.errorState === true && (
+          <p id="error-info">Error fetching data</p>
+        )}
       </div>
     );
   }
