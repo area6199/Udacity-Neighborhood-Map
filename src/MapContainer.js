@@ -34,7 +34,7 @@ export default class MapContainer extends Component {
     return (
       <div className="map-container">
         <UdacityNeighborhoodMap
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDCdankEOle73lu7TELdK0j-ssCMa3kaI&v=3&callback=initMap"
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDCdankEOle73lu7TELdK0j-ssCMa3kaI&v=3"
           loadingElement={<div style={{ height: `100vh` }} />}
           containerElement={<div style={{ height: `100vh` }} />}
           mapElement={<div style={{ height: `100vh` }} />}
