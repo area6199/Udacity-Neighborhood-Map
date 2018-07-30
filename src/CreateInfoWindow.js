@@ -12,9 +12,11 @@ export default class CreateInfoWindow extends Component {
     return (
       <InfoWindow onCloseClick={this.props.closeWindow}>
         <div className="info-window"
-        style= {{maxHeight: 350, maxWidth:170}}>
+        style= {{maxHeight: 350, maxWidth:170}}
+        >
           <h2>{name}</h2>
-          <h4>Movies playing</h4>
+          <h4>Movies playing:</h4>
+          <div>
           {(typeof this.props.movies !== 'undefined') && ( (this.props.movies.length === 0 && <p>No programm available</p>) ||
             this.props.movies.map(movie => (
               <div key={this.props.id+movie.title} className="info-window-details">
@@ -26,9 +28,11 @@ export default class CreateInfoWindow extends Component {
                 />
                 <span>{movie.title}</span>
               </div>
+              
             )))
             
             }
+            </div>
         </div>
       </InfoWindow>
     );

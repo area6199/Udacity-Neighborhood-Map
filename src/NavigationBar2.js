@@ -51,7 +51,7 @@ export default class NavigationBar2 extends Component {
 
             <div />
           </ul>
-          <p className='data-from'>Data from: www.internationalshowtimes.com</p>
+          <p className='data-from'>Data from: <a href="https://www.internationalshowtimes.com/"> www.internationalshowtimes.com</a> </p>
         </nav>
       </div>
     );
