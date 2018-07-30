@@ -7,8 +7,9 @@ export default class CreateMarker extends Component {
   state = {
     movies: [],
     errorState: false
-
   };
+
+  // fetch movies wich are playing in each cinema
   componentDidMount() {
     let moviesFromCinema;
     fetch(
@@ -26,12 +27,11 @@ export default class CreateMarker extends Component {
       .then(function(responseAsJson) {
         moviesFromCinema = responseAsJson.movies;
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({
           errorState: true
-        })
-                console.log("Looks like there was a problem: \n", error);
-
+        });
+        console.log("Looks like there was a problem: \n", error);
       })
       .then(() => {
         this.setState({
@@ -53,32 +53,29 @@ export default class CreateMarker extends Component {
 
     return (
       <div>
-           {this.state.errorState === true && (
+        {this.state.errorState === true && (
           <p id="error-info">Error fetching data</p>
         )}
-      <Marker
-        position={{
-          lat: parseFloat(lat),
-          lng: parseFloat(lng)
-        }}
-        onClick={this.showInfoWindow.bind(this)}
-      >
-        {typeof this.props.cinemaLocations[this.props.index].showInfowWindow !==
-          "undefined" &&
-          (this.props.cinemaLocations[this.props.index].showInfowWindow ===
-            true && (
-            <CreateInfoWindow
-              name={name}
-              id={id}
-              key={id}
-              closeInfoWindow={this.closeInfoWindow.bind(this)}
-              movies={this.state.movies}
-            />
-          ))
-       
-        }
-        
-      </Marker>
+        <Marker
+          position={{
+            lat: parseFloat(lat),
+            lng: parseFloat(lng)
+          }}
+          onClick={this.showInfoWindow.bind(this)}
+        >
+          {typeof this.props.cinemaLocations[this.props.index]
+            .showInfowWindow !== "undefined" &&
+            (this.props.cinemaLocations[this.props.index].showInfowWindow ===
+              true && (
+              <CreateInfoWindow
+                name={name}
+                id={id}
+                key={id}
+                closeInfoWindow={this.closeInfoWindow.bind(this)}
+                movies={this.state.movies}
+              />
+            ))}
+        </Marker>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import NavigationBar from "./NavigationBar";
 import NavigationBar2 from "./NavigationBar2";
 import MapContainer from "./MapContainer";
 import escapeRegExp from "escape-string-regexp";
@@ -13,9 +12,8 @@ class App extends Component {
   };
   componentDidMount() {
     let cinema;
-
+    // fetch cinema locations from https://www.internationalshowtimes.com/
     fetch(
-      // "https://ap.com/v4/cinemas/?location=49.445421,11.081630&distance=10",
       "https://api.internationalshowtimes.com/v4/cinemas/?location=49.445421,11.081630&distance=10",
       {
         headers: {
@@ -29,12 +27,11 @@ class App extends Component {
       .then(function(responseAsJson) {
         cinema = responseAsJson.cinemas;
       })
-      .catch((error) => {
-        this.setStateOfError(true)
-                console.log("Looks like there was a problem: \n", error);
+      .catch(error => {
+        this.setStateOfError(true);
+        console.log("Looks like there was a problem: \n", error);
+      })
 
-    })
-   
       .then(() => {
         this.setState({
           cinemaLocations: cinema,
@@ -43,6 +40,7 @@ class App extends Component {
       });
   }
 
+  // filter function using a regular expression
   filterLocations = value => {
     let searchedLocations;
     const match = new RegExp(escapeRegExp(value), "i");
@@ -54,19 +52,19 @@ class App extends Component {
     });
   };
 
+  // set the showing state of the InfoWindow of a marker
   setStateOfcinemaLocations = (id, showInfowWindowValue) => {
     let locations = this.state.cinemaLocationsFilterd;
     let index = locations.findIndex(location => location.id === id);
-    // console.log(index);
     if (index !== -1) {
       locations[index].showInfowWindow = showInfowWindowValue;
-      // console.log(locations);
       this.setState({
         cinemaLocationsFilterd: locations
       });
     }
   };
 
+  // set state in order to display the error message
   setStateOfError = state => {
     this.setState({
       errorState: state
@@ -86,6 +84,7 @@ class App extends Component {
           setStateOfcinemaLocations={this.setStateOfcinemaLocations}
           showError={this.setStateOfError}
         />
+
         {this.state.errorState === true && (
           <p id="error-info">Error fetching data</p>
         )}

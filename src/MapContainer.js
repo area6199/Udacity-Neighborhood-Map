@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import CreateMarker from "./CreateMarker";
 
+// creact map
 const UdacityNeighborhoodMap = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap defaultCenter={props.center} defaultZoom={props.defaultZoom}>
@@ -17,8 +13,9 @@ const UdacityNeighborhoodMap = withScriptjs(
 
 export default class MapContainer extends Component {
   render() {
-    
-    const places =  typeof this.props.cinemaLocations !== 'undefined' && (
+    // create marker for each cinema
+    const places =
+      typeof this.props.cinemaLocations !== "undefined" &&
       this.props.cinemaLocations.map((location, index) => (
         <CreateMarker
           lat={location.location.lat}
@@ -29,11 +26,9 @@ export default class MapContainer extends Component {
           id={location.id}
           setStateOfcinemaLocations={this.props.setStateOfcinemaLocations}
           cinemaLocations={this.props.cinemaLocations}
-          showError ={this.props.showError}
+          showError={this.props.showError}
         />
-      ))
-    )
-    
+      ));
 
     return (
       <div className="map-container">
