@@ -21,6 +21,7 @@ export default class CreateMarker extends Component {
         }
       }
     )
+      .then(this.props.handleErrors)
       .then(function(response) {
         return response.json();
       })
@@ -41,13 +42,10 @@ export default class CreateMarker extends Component {
   }
 
   showInfoWindow = () => {
-    
     this.props.cinemaLocations.forEach(element => {
       this.props.setStateOfcinemaLocations(element.id, false);
-      
     });
     this.props.setStateOfcinemaLocations(this.props.id, true);
-
   };
 
   closeInfoWindow() {

@@ -20,7 +20,7 @@ class App extends Component {
           "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"
         }
       }
-    )
+    ).then(this.handleErrors)
       .then(function(response) {
         return response.json();
       })
@@ -71,6 +71,13 @@ class App extends Component {
     });
   };
 
+  handleErrors = (response)=> {
+    if (!response.ok) {
+        this.setStateOfError(true)
+    }
+    return response;
+}
+
   render() {
     return (
       <div className="App">
@@ -83,6 +90,7 @@ class App extends Component {
           cinemaLocations={this.state.cinemaLocationsFilterd}
           setStateOfcinemaLocations={this.setStateOfcinemaLocations}
           showError={this.setStateOfError}
+          handleErrors = {this.handleErrors}
         />
 
         {this.state.errorState === true && (

@@ -27,6 +27,7 @@ export default class MapContainer extends Component {
           setStateOfcinemaLocations={this.props.setStateOfcinemaLocations}
           cinemaLocations={this.props.cinemaLocations}
           showError={this.props.showError}
+          handleErrors={this.props.handleErrors}
         />
       ));
 
