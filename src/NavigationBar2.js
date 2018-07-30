@@ -15,7 +15,7 @@ export default class NavigationBar2 extends Component {
   }
 
   showInfoWindow(event) {
-    this.props.cinemaLocations.forEach(element => {
+    this.props.cinemaLocationsFilterd.forEach(element => {
       this.props.setStateOfcinemaLocations(element.id, false);      
     });
     this.props.setStateOfcinemaLocations(event.target.id, true);
