@@ -16,9 +16,15 @@ export default class NavigationBar2 extends Component {
 
   showInfoWindow(event) {
     this.props.cinemaLocationsFilterd.forEach(element => {
-      this.props.setStateOfcinemaLocations(element.id, false);      
+      this.props.setStateOfcinemaLocations(element.id, false);
     });
     this.props.setStateOfcinemaLocations(event.target.id, true);
+  }
+
+  setFocusToInfoWindow(evt){
+    if (evt.which === 9) {
+      document.getElementsByClassName("info-window-details-headline")[0].focus()
+    }
   }
 
   render() {
@@ -39,11 +45,14 @@ export default class NavigationBar2 extends Component {
               {typeof this.props.cinemaLocationsFilterd !== "undefined" &&
                 this.props.cinemaLocationsFilterd.map((cinema, index) => (
                   <li
+                    tabIndex="0"
                     className="filtered-cinemas"
                     id={cinema.id}
                     key={index}
                     onMouseOver={this.showInfoWindow.bind(this)}
+                    onFocus={this.showInfoWindow.bind(this)}
                     onMouseOut={this.closeInfoWindow.bind(this)}
+                    onKeyDown={this.setFocusToInfoWindow}
                   >
                     {cinema.name}
                   </li>
@@ -53,7 +62,7 @@ export default class NavigationBar2 extends Component {
           </ul>
           <p className="data-from">
             Data from:{" "}
-            <a href="https://www.internationalshowtimes.com/">
+            <a tabIndex={-1} href="https://www.internationalshowtimes.com/">
               {" "}
               www.internationalshowtimes.com
             </a>{" "}

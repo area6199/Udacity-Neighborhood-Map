@@ -73,10 +73,12 @@ export default class CreateMarker extends Component {
               true && (
               <CreateInfoWindow
                 name={name}
-                id={id}
+                id={this.props.index}
                 key={id}
                 closeInfoWindow={this.closeInfoWindow.bind(this)}
                 movies={this.state.movies}
+                cinemaLocations={this.props.cinemaLocations}
+
               />
             ))}
         </Marker>
