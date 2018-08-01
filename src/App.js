@@ -11,7 +11,7 @@ class App extends Component {
     errorState: false
   };
   componentDidMount() {
-    let cinema;
+    let cinemas;
     // fetch cinema locations from https://www.internationalshowtimes.com/
     fetch(
       "https://api.internationalshowtimes.com/v4/cinemas/?location=49.445421,11.081630&distance=10",
@@ -20,12 +20,13 @@ class App extends Component {
           "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"
         }
       }
-    ).then(this.handleErrors)
+    )
+      .then(this.handleErrors)
       .then(function(response) {
         return response.json();
       })
       .then(function(responseAsJson) {
-        cinema = responseAsJson.cinemas;
+        cinemas = responseAsJson.cinemas;
       })
       .catch(error => {
         this.setStateOfError(true);
@@ -33,12 +34,41 @@ class App extends Component {
       })
 
       .then(() => {
-        this.setState({
-          cinemaLocations: cinema,
-          cinemaLocationsFilterd: cinema
-        });
+        this.getShowtimes(cinemas)
       });
   }
+
+  getShowtimes = cinemas => {
+    // let cinemas
+    cinemas.map((cinema, index) => {
+      fetch(
+        "https://api.internationalshowtimes.com/v4/movies/?cinema_id=" +
+          cinema.id,
+        {
+          headers: {
+            "X-API-Key": "u0x0cqjLiqAq0jPCeZ0WSrqPFKVylLdV"
+          }
+        }
+      )
+        .then(this.props.handleErrors)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(responseAsJson) {
+          cinemas[index].movies = responseAsJson.movies;
+        })
+        .catch(error => {
+          this.setState({
+            errorState: true
+          });
+          console.log("Looks like there was a problem: \n", error);
+        })
+    }) 
+      this.setState({
+        cinemaLocations: cinemas,
+        cinemaLocationsFilterd: cinemas
+      });
+  };
 
   // filter function using a regular expression
   filterLocations = value => {
@@ -71,12 +101,12 @@ class App extends Component {
     });
   };
 
-  handleErrors = (response)=> {
+  handleErrors = response => {
     if (!response.ok) {
-        this.setStateOfError(true)
+      this.setStateOfError(true);
     }
     return response;
-}
+  };
 
   render() {
     return (
@@ -90,7 +120,7 @@ class App extends Component {
           cinemaLocations={this.state.cinemaLocationsFilterd}
           setStateOfcinemaLocations={this.setStateOfcinemaLocations}
           showError={this.setStateOfError}
-          handleErrors = {this.handleErrors}
+          handleErrors={this.handleErrors}
         />
 
         {this.state.errorState === true && (
