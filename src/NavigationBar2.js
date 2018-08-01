@@ -33,13 +33,16 @@ export default class NavigationBar2 extends Component {
     return (
       <div className="navigation-bar">
         <nav>
+          <div id="search-cinemas-div">
+        <label for="search-cinemas-input">Search cinemas:</label>
           <input
             type="text"
             value={this.state.value}
             id="search-cinemas-input"
             onChange={this.handleChange.bind(this)}
-            placeholder="Search cinemas"
+            // placeholder="Search cinemas"
           />
+          </div>
           <ul>
             {typeof this.props.cinemaLocationsFilterd !== "undefined" &&
               this.props.cinemaLocationsFilterd.map((cinema, index) => (

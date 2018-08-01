@@ -57,10 +57,12 @@ ul {
 
 }
 #search-cinemas-input{
-  margin: 10px 5px 5px 5px;
-  width: 91%;
+  width: 92%;
 }
-
+#search-cinemas-div{
+  margin: 10px 5px 5px 5px;
+  width: 100%;
+}
 .filtered-cinemas {
   background-color: grey;
   margin-bottom: 2px;
