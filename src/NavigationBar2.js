@@ -34,7 +34,7 @@ export default class NavigationBar2 extends Component {
       <div className="navigation-bar">
         <nav>
           <div id="search-cinemas-div">
-        <label for="search-cinemas-input">Search cinemas:</label>
+        <label htmlFor="search-cinemas-input">Search cinemas:</label>
           <input
             type="text"
             value={this.state.value}
