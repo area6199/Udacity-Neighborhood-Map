@@ -12,7 +12,8 @@ export default class CreateInfoWindow extends Component {
     if (event.which === 9) {
       if (
         cinemaIndex + 1 <
-        document.getElementsByClassName("info-window-main").length
+        document
+          .getElementsByClassName("filtered-cinemas").length
       ) {
         document
           .getElementsByClassName("filtered-cinemas")
