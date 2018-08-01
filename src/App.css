@@ -53,13 +53,14 @@ a {
 ul {
   list-style-type: none;
   padding: 5px;
+  margin: 0px;
+
 }
 #search-cinemas-input{
-  width: 100%;
+  margin: 10px 5px 5px 5px;
+  width: 91%;
 }
-#search-cinemas-li{
-  padding-right: 4px;
-}
+
 .filtered-cinemas {
   background-color: grey;
   margin-bottom: 2px;

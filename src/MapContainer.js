@@ -28,6 +28,7 @@ export default class MapContainer extends Component {
           cinemaLocations={this.props.cinemaLocations}
           showError={this.props.showError}
           handleErrors={this.props.handleErrors}
+          icon={location.markerIcon}
         />
       ));
 

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Marker } from "react-google-maps";
-
 import CreateInfoWindow from "./CreateInfoWindow";
 
 export default class CreateMarker extends Component {
-   showInfoWindow = () => {
+  state;
+  showInfoWindow = () => {
     this.props.cinemaLocations.forEach(element => {
       this.props.setStateOfcinemaLocations(element.id, false);
     });
@@ -16,7 +16,7 @@ export default class CreateMarker extends Component {
   }
 
   render() {
-    const { lat, lng, name, id } = this.props;
+    const { lat, lng, name, id, icon } = this.props;
 
     return (
       <div>
@@ -26,6 +26,7 @@ export default class CreateMarker extends Component {
             lng: parseFloat(lng)
           }}
           onClick={this.showInfoWindow.bind(this)}
+          icon={icon}
         >
           {typeof this.props.cinemaLocations[this.props.index]
             .showInfowWindow !== "undefined" &&

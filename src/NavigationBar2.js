@@ -21,9 +21,11 @@ export default class NavigationBar2 extends Component {
     this.props.setStateOfcinemaLocations(event.target.id, true);
   }
 
-  setFocusToInfoWindow(evt){
+  setFocusToInfoWindow(evt) {
     if (evt.which === 9) {
-      document.getElementsByClassName("info-window-details-headline")[0].focus()
+      document
+        .getElementsByClassName("info-window-details-headline")[0]
+        .focus();
     }
   }
 
@@ -31,34 +33,29 @@ export default class NavigationBar2 extends Component {
     return (
       <div className="navigation-bar">
         <nav>
+          <input
+            type="text"
+            value={this.state.value}
+            id="search-cinemas-input"
+            onChange={this.handleChange.bind(this)}
+            placeholder="Search cinemas"
+          />
           <ul>
-            <li id="search-cinemas-li">
-              <input
-                type="text"
-                value={this.state.value}
-                id="search-cinemas-input"
-                onChange={this.handleChange.bind(this)}
-                placeholder="Search cinemas"
-              />
-            </li>
-            <div>
-              {typeof this.props.cinemaLocationsFilterd !== "undefined" &&
-                this.props.cinemaLocationsFilterd.map((cinema, index) => (
-                  <li
-                    tabIndex="0"
-                    className="filtered-cinemas"
-                    id={cinema.id}
-                    key={index}
-                    onMouseOver={this.showInfoWindow.bind(this)}
-                    onFocus={this.showInfoWindow.bind(this)}
-                    onMouseOut={this.closeInfoWindow.bind(this)}
-                    onKeyDown={this.setFocusToInfoWindow}
-                  >
-                    {cinema.name}
-                  </li>
-                ))}
-            </div>
-            <div />
+            {typeof this.props.cinemaLocationsFilterd !== "undefined" &&
+              this.props.cinemaLocationsFilterd.map((cinema, index) => (
+                <li
+                  tabIndex="0"
+                  className="filtered-cinemas"
+                  id={cinema.id}
+                  key={index}
+                  onMouseOver={this.showInfoWindow.bind(this)}
+                  onFocus={this.showInfoWindow.bind(this)}
+                  onMouseOut={this.closeInfoWindow.bind(this)}
+                  onKeyDown={this.setFocusToInfoWindow}
+                >
+                  {cinema.name}
+                </li>
+              ))}
           </ul>
           <p className="data-from">
             Data from:{" "}

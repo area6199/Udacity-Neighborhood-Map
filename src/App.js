@@ -3,12 +3,15 @@ import "./App.css";
 import NavigationBar2 from "./NavigationBar2";
 import MapContainer from "./MapContainer";
 import escapeRegExp from "escape-string-regexp";
+import markerBlue from './marker-blue.png'
+import markerDefault from './marker-default.png'
 
 class App extends Component {
   state = {
     cinemaLocations: [],
     cinemaLocationsFilterd: [],
-    errorState: false
+    errorState: false,
+    hasError: false
   };
   componentDidMount() {
     let cinemas;
@@ -34,8 +37,15 @@ class App extends Component {
       })
 
       .then(() => {
-        this.getShowtimes(cinemas)
+        this.getShowtimes(cinemas);
       });
+  }
+
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    <p id="error-info">Error loading Map</p>;
+
+    this.setState({ hasError: true });
   }
 
   getShowtimes = cinemas => {
@@ -62,12 +72,12 @@ class App extends Component {
             errorState: true
           });
           console.log("Looks like there was a problem: \n", error);
-        })
-    }) 
-      this.setState({
-        cinemaLocations: cinemas,
-        cinemaLocationsFilterd: cinemas
-      });
+        });
+    });
+    this.setState({
+      cinemaLocations: cinemas,
+      cinemaLocationsFilterd: cinemas
+    });
   };
 
   // filter function using a regular expression
@@ -88,6 +98,12 @@ class App extends Component {
     let index = locations.findIndex(location => location.id === id);
     if (index !== -1) {
       locations[index].showInfowWindow = showInfowWindowValue;
+      if (showInfowWindowValue) {
+        locations[index].markerIcon = markerBlue
+      }
+      else{
+        locations[index].markerIcon = markerDefault
+      }
       this.setState({
         cinemaLocationsFilterd: locations
       });
@@ -110,7 +126,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div role="main" className="App">
         <NavigationBar2
           cinemaLocationsFilterd={this.state.cinemaLocationsFilterd}
           filterLocations={this.filterLocations}

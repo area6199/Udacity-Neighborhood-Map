@@ -12,12 +12,10 @@ export default class CreateInfoWindow extends Component {
     if (event.which === 9) {
       if (
         cinemaIndex + 1 <
-        document
-          .getElementsByClassName("filtered-cinemas").length
+        document.getElementsByClassName("filtered-cinemas").length
       ) {
         document
-          .getElementsByClassName("filtered-cinemas")
-          [cinemaIndex].focus();
+          .getElementsByClassName("filtered-cinemas")[cinemaIndex].focus();
       } else {
         window.focus();
       }
@@ -27,7 +25,7 @@ export default class CreateInfoWindow extends Component {
   populateInfoWindow = obj => {
     const objLength = obj.length - 1;
     return obj.map((movie, index) => (
-      <div key={this.props.id + movie.title} className="info-window-details">
+      <div key={index + movie.id + movie.title} className="info-window-details">
         <img
           src={movie.poster_image_thumbnail}
           alt={movie.title}
@@ -66,23 +64,7 @@ export default class CreateInfoWindow extends Component {
                   No programm available
                 </p>
               )) ||
-                this.populateInfoWindow(this.props.movies))
-            // this.props.movies.map((movie,index) => (
-
-            //   <div
-            //     key={this.props.id + movie.title}
-            //     className="info-window-details"
-            //   >
-            //     <img
-            //       src={movie.poster_image_thumbnail}
-            //       alt={movie.title}
-            //       className="poster-image-thumbnail"
-            //       style={{ width: 25, paddingRight: 10 }}
-            //     />
-            //     <span tabIndex="0">{movie.title}</span>
-            //   </div>
-            // ))
-            }
+                this.populateInfoWindow(this.props.movies))}
           </div>
         </div>
       </InfoWindow>
