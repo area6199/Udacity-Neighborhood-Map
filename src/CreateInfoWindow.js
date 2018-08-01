@@ -25,7 +25,7 @@ export default class CreateInfoWindow extends Component {
   populateInfoWindow = obj => {
     const objLength = obj.length - 1;
     return obj.map((movie, index) => (
-      <div key={index + movie.id + movie.title} className="info-window-details">
+      <div key={this.props.id + index + movie.id + movie.title} className="info-window-details">
         <img
           src={movie.poster_image_thumbnail}
           alt={movie.title}
